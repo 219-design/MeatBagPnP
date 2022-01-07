@@ -28,7 +28,7 @@ except Exception as py2Ex:
         raise py3Ex
     
         
-from sgmllib import SGMLParser
+# from sgmllib import SGMLParser
 
 
 class PCBPainter(Widgets.QDialog):
