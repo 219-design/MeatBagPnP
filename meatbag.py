@@ -55,7 +55,7 @@ class PCBPainter(Widgets.QDialog):
         self.pcbheight.setMinimum(0)
         self.pcbheight.setMaximum(100000)
         self.pcbheight.valueChanged.connect(self.clearfocusdelay)
-        self.marker_diameter = 5
+        self.marker_diameter = 25
 
         buttongrid = Widgets.QHBoxLayout()
         buttongrid.addWidget(openpb)
@@ -117,12 +117,12 @@ class PCBPainter(Widgets.QDialog):
         painter.begin(self.base)
         painter.setBrush(QtCore.Qt.black)
         painter.setOpacity(0.45)
-        painter.drawEllipse(QtCore.QPoint(x+(float(0.15*self.marker_diameter)), y+(float(0.15*self.marker_diameter))), self.marker_diameter, self.marker_diameter)
+        # painter.drawEllipse(QtCore.QPoint(x+(float(0.15*self.marker_diameter)), y+(float(0.15*self.marker_diameter))), self.marker_diameter, self.marker_diameter)
         painter.end()
         
         painter.begin(self.base)
         painter.setBrush(QtCore.Qt.red)
-        painter.setOpacity(0.95)
+        painter.setOpacity(0.5)
         painter.drawEllipse(center, self.marker_diameter, self.marker_diameter)
         painter.end()
 
@@ -249,6 +249,7 @@ class MeatBagWindow(Widgets.QMainWindow):
             self.csv_settings = MeatBagCSVSettingsAltium()
 
         self.getSettings()
+        self.resize(1000,1000)
         self.show()
 
         self.webView = WebView()
@@ -289,6 +290,9 @@ class MeatBagWindow(Widgets.QMainWindow):
 
         ###Main parts table
         self.table = Widgets.QTableWidget()
+        f = self.table.font()
+        f.setPointSize(12)
+        self.table.setFont(f)
         self.table.horizontalHeader().setStretchLastSection(True)
         self.table.installEventFilter(self.efilter)
         self.table.cellClicked.connect(self.table_cellClicked)
@@ -322,13 +326,13 @@ class MeatBagWindow(Widgets.QMainWindow):
 
         label_cur = Widgets.QLabel("Current Placement:")
         f = label_cur.font()
-        f.setPointSize(12)
+        f.setPointSize(24)
         label_cur.setFont(f)
         partLayout.addWidget(label_cur, 0, 0)
 
         self.place = Widgets.QLineEdit()
         f = self.place.font()
-        f.setPointSize(12)
+        f.setPointSize(24)
         self.place.setFont(f)
         self.place.setReadOnly(True)
         partLayout.addWidget(self.place, 0, 1)
